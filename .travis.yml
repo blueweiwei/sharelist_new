@@ -1,0 +1,14 @@
+language: node_js
+branches:
+  only:
+  - 0.1
+node_js:
+  - 'lts/*'
+services:
+  - docker
+script:
+  #- npm install pkg -g
+  #- npm run build
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t reruin/sharelist:latest .
+  - docker push reruin/sharelist:latest
